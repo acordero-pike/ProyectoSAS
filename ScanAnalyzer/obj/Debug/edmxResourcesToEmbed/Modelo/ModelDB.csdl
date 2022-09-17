@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ScanAnalyzeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Analis_Rules_Db">
+    <Key>
+      <PropertyRef Name="UUID" />
+    </Key>
+    <Property Name="UUID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Revisar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Palabra_clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Busqueda" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Tipo_Advertencia" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Analis_Rules_Port">
+    <Key>
+      <PropertyRef Name="UUID" />
+    </Key>
+    <Property Name="UUID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Puerto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="UPD" Type="Boolean" />
+    <Property Name="TCP" Type="Boolean" />
+    <Property Name="Tipo_Advertencia" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Analisis">
+    <Key>
+      <PropertyRef Name="UUID" />
+    </Key>
+    <Property Name="UUID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UUID_US" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="Fecha__Accion" Type="DateTime" Precision="3" />
+    <Property Name="Tipo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Analisis_UUID_US" FromRole="Analisis" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="UUID" />
+    </Key>
+    <Property Name="UUID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="usuario1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Contraseña" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="Tipo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Activo" Type="Boolean" />
+    <NavigationProperty Name="Analisis" Relationship="Self.FK_Analisis_UUID_US" FromRole="Usuario" ToRole="Analisis" />
+  </EntityType>
+  <Association Name="FK_Analisis_UUID_US">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Analisis" Type="Self.Analisis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="UUID" />
+      </Principal>
+      <Dependent Role="Analisis">
+        <PropertyRef Name="UUID_US" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ScanAnalyzeEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Analis_Rules_Db" EntityType="Self.Analis_Rules_Db" />
+    <EntitySet Name="Analis_Rules_Port" EntityType="Self.Analis_Rules_Port" />
+    <EntitySet Name="Analisis" EntityType="Self.Analisis" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+    <AssociationSet Name="FK_Analisis_UUID_US" Association="Self.FK_Analisis_UUID_US">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Analisis" EntitySet="Analisis" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

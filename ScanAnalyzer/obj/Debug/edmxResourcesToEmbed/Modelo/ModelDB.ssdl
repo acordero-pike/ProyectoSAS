@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ScanAnalyzeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Analis_Rules_Db">
+    <Key>
+      <PropertyRef Name="UUID" />
+    </Key>
+    <Property Name="UUID" Type="varchar" MaxLength="36" Nullable="false" />
+    <Property Name="Revisar" Type="varchar" MaxLength="100" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="Palabra_clave" Type="varchar" MaxLength="50" />
+    <Property Name="Busqueda" Type="varchar" MaxLength="50" />
+    <Property Name="Tipo_Advertencia" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="Analis_Rules_Port">
+    <Key>
+      <PropertyRef Name="UUID" />
+    </Key>
+    <Property Name="UUID" Type="varchar" MaxLength="36" Nullable="false" />
+    <Property Name="Puerto" Type="varchar" MaxLength="100" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="UPD" Type="bit" />
+    <Property Name="TCP" Type="bit" />
+    <Property Name="Tipo_Advertencia" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="Analisis">
+    <Key>
+      <PropertyRef Name="UUID" />
+    </Key>
+    <Property Name="UUID" Type="varchar" MaxLength="36" Nullable="false" />
+    <Property Name="UUID_US" Type="varchar" MaxLength="36" />
+    <Property Name="Fecha _Accion" Type="datetime" />
+    <Property Name="Tipo" Type="varchar" MaxLength="30" />
+    <Property Name="Data" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="UUID" />
+    </Key>
+    <Property Name="UUID" Type="varchar" MaxLength="36" Nullable="false" />
+    <Property Name="Nombres" Type="varchar" MaxLength="50" />
+    <Property Name="Apellidos" Type="varchar" MaxLength="50" />
+    <Property Name="usuario" Type="varchar" MaxLength="30" />
+    <Property Name="Contraseña" Type="varchar" MaxLength="64" />
+    <Property Name="Tipo" Type="varchar" MaxLength="30" />
+    <Property Name="Activo" Type="bit" />
+  </EntityType>
+  <Association Name="FK_Analisis_UUID_US">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Analisis" Type="Self.Analisis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="UUID" />
+      </Principal>
+      <Dependent Role="Analisis">
+        <PropertyRef Name="UUID_US" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ScanAnalyzeModelStoreContainer">
+    <EntitySet Name="Analis_Rules_Db" EntityType="Self.Analis_Rules_Db" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Analis_Rules_Port" EntityType="Self.Analis_Rules_Port" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Analisis" EntityType="Self.Analisis" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Analisis_UUID_US" Association="Self.FK_Analisis_UUID_US">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Analisis" EntitySet="Analisis" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

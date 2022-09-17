@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ScanAnalyzeModelStoreContainer" CdmEntityContainer="ScanAnalyzeEntities1">
+    <EntitySetMapping Name="Analis_Rules_Db">
+      <EntityTypeMapping TypeName="ScanAnalyzeModel.Analis_Rules_Db">
+        <MappingFragment StoreEntitySet="Analis_Rules_Db">
+          <ScalarProperty Name="UUID" ColumnName="UUID" />
+          <ScalarProperty Name="Revisar" ColumnName="Revisar" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Palabra_clave" ColumnName="Palabra_clave" />
+          <ScalarProperty Name="Busqueda" ColumnName="Busqueda" />
+          <ScalarProperty Name="Tipo_Advertencia" ColumnName="Tipo_Advertencia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Analis_Rules_Port">
+      <EntityTypeMapping TypeName="ScanAnalyzeModel.Analis_Rules_Port">
+        <MappingFragment StoreEntitySet="Analis_Rules_Port">
+          <ScalarProperty Name="UUID" ColumnName="UUID" />
+          <ScalarProperty Name="Puerto" ColumnName="Puerto" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="UPD" ColumnName="UPD" />
+          <ScalarProperty Name="TCP" ColumnName="TCP" />
+          <ScalarProperty Name="Tipo_Advertencia" ColumnName="Tipo_Advertencia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Analisis">
+      <EntityTypeMapping TypeName="ScanAnalyzeModel.Analisis">
+        <MappingFragment StoreEntitySet="Analisis">
+          <ScalarProperty Name="UUID" ColumnName="UUID" />
+          <ScalarProperty Name="UUID_US" ColumnName="UUID_US" />
+          <ScalarProperty Name="Fecha__Accion" ColumnName="Fecha _Accion" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="ScanAnalyzeModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="UUID" ColumnName="UUID" />
+          <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+          <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+          <ScalarProperty Name="usuario1" ColumnName="usuario" />
+          <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

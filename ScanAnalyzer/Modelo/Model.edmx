@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ScanAnalyzeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Analis_Rules_Db">
+          <Key>
+            <PropertyRef Name="UUID" />
+          </Key>
+          <Property Name="UUID" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="Revisar" Type="varchar" MaxLength="100" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="Palabra_clave" Type="varchar" MaxLength="50" />
+          <Property Name="Busqueda" Type="varchar" MaxLength="50" />
+          <Property Name="Tipo_Advertencia" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Analis_Rules_Port">
+          <Key>
+            <PropertyRef Name="UUID" />
+          </Key>
+          <Property Name="UUID" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="Puerto" Type="varchar" MaxLength="100" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="UPD" Type="bit" />
+          <Property Name="TCP" Type="bit" />
+          <Property Name="Tipo_Advertencia" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Analisis">
+          <Key>
+            <PropertyRef Name="UUID" />
+          </Key>
+          <Property Name="UUID" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="UUID_US" Type="varchar" MaxLength="36" />
+          <Property Name="Fecha _Accion" Type="datetime" />
+          <Property Name="Tipo" Type="varchar" MaxLength="30" />
+          <Property Name="Data" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="UUID" />
+          </Key>
+          <Property Name="UUID" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="50" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="50" />
+          <Property Name="usuario" Type="varchar" MaxLength="30" />
+          <Property Name="Contraseña" Type="varchar" MaxLength="64" />
+          <Property Name="Tipo" Type="varchar" MaxLength="30" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Analisis_UUID_US">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Analisis" Type="Self.Analisis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UUID" />
+            </Principal>
+            <Dependent Role="Analisis">
+              <PropertyRef Name="UUID_US" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ScanAnalyzeModelStoreContainer">
+          <EntitySet Name="Analis_Rules_Db" EntityType="Self.Analis_Rules_Db" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Analis_Rules_Port" EntityType="Self.Analis_Rules_Port" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Analisis" EntityType="Self.Analisis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Analisis_UUID_US" Association="Self.FK_Analisis_UUID_US">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Analisis" EntitySet="Analisis" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ScanAnalyzeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Analis_Rules_Db">
+          <Key>
+            <PropertyRef Name="UUID" />
+          </Key>
+          <Property Name="UUID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Revisar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Palabra_clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Busqueda" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo_Advertencia" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Analis_Rules_Port">
+          <Key>
+            <PropertyRef Name="UUID" />
+          </Key>
+          <Property Name="UUID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Puerto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UPD" Type="Boolean" />
+          <Property Name="TCP" Type="Boolean" />
+          <Property Name="Tipo_Advertencia" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Analisis">
+          <Key>
+            <PropertyRef Name="UUID" />
+          </Key>
+          <Property Name="UUID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UUID_US" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha__Accion" Type="DateTime" Precision="3" />
+          <Property Name="Tipo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Analisis_UUID_US" FromRole="Analisis" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="UUID" />
+          </Key>
+          <Property Name="UUID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="usuario1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Contraseña" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="Analisis" Relationship="Self.FK_Analisis_UUID_US" FromRole="Usuario" ToRole="Analisis" />
+        </EntityType>
+        <Association Name="FK_Analisis_UUID_US">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Analisis" Type="Self.Analisis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UUID" />
+            </Principal>
+            <Dependent Role="Analisis">
+              <PropertyRef Name="UUID_US" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ScanAnalyzeEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Analis_Rules_Db" EntityType="Self.Analis_Rules_Db" />
+          <EntitySet Name="Analis_Rules_Port" EntityType="Self.Analis_Rules_Port" />
+          <EntitySet Name="Analisis" EntityType="Self.Analisis" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK_Analisis_UUID_US" Association="Self.FK_Analisis_UUID_US">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Analisis" EntitySet="Analisis" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ScanAnalyzeModelStoreContainer" CdmEntityContainer="ScanAnalyzeEntities1">
+          <EntitySetMapping Name="Analis_Rules_Db">
+            <EntityTypeMapping TypeName="ScanAnalyzeModel.Analis_Rules_Db">
+              <MappingFragment StoreEntitySet="Analis_Rules_Db">
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+                <ScalarProperty Name="Revisar" ColumnName="Revisar" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Palabra_clave" ColumnName="Palabra_clave" />
+                <ScalarProperty Name="Busqueda" ColumnName="Busqueda" />
+                <ScalarProperty Name="Tipo_Advertencia" ColumnName="Tipo_Advertencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Analis_Rules_Port">
+            <EntityTypeMapping TypeName="ScanAnalyzeModel.Analis_Rules_Port">
+              <MappingFragment StoreEntitySet="Analis_Rules_Port">
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+                <ScalarProperty Name="Puerto" ColumnName="Puerto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="UPD" ColumnName="UPD" />
+                <ScalarProperty Name="TCP" ColumnName="TCP" />
+                <ScalarProperty Name="Tipo_Advertencia" ColumnName="Tipo_Advertencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Analisis">
+            <EntityTypeMapping TypeName="ScanAnalyzeModel.Analisis">
+              <MappingFragment StoreEntitySet="Analisis">
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+                <ScalarProperty Name="UUID_US" ColumnName="UUID_US" />
+                <ScalarProperty Name="Fecha__Accion" ColumnName="Fecha _Accion" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="ScanAnalyzeModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="usuario1" ColumnName="usuario" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
